@@ -5,7 +5,7 @@ export const startTestOptions: TelegramBot.SendMessageOptions = {
     inline_keyboard: [
       [
         {
-          text: 'Пройти проверку',
+          text: 'Begin Task',
           callback_data: '/start_test'
         }
       ]
@@ -13,141 +13,93 @@ export const startTestOptions: TelegramBot.SendMessageOptions = {
   }
 } as const
 
-export const startFlatOptions: TelegramBot.SendMessageOptions = {
+export const capitalOptions: TelegramBot.SendMessageOptions = {
   reply_markup: {
     inline_keyboard: [
       [
         {
-          text: '20',
-          callback_data: '/flat_20'
-        },
-        {
-          text: '45',
-          callback_data: '/flat_45'
-        },
-        {
-          text: '63',
-          callback_data: '/flat_63'
+          text: 'London',
+          callback_data: '/capital_London'
         }
       ],
       [
         {
-          text: '88',
-          callback_data: '/flat_88'
-        },
-        {
-          text: '76',
-          callback_data: '/flat_76'
-        },
-        {
-          text: '11',
-          callback_data: '/flat_11'
+          text: 'Berlin',
+          callback_data: '/capital_Berlin'
         }
       ],
       [
         {
-          text: '7',
-          callback_data: '/flat_7'
-        },
-        {
-          text: '102',
-          callback_data: '/flat_102'
-        },
-        {
-          text: '53',
-          callback_data: '/flat_53'
+          text: 'Paris',
+          callback_data: '/capital_Paris'
         }
       ],
       [
         {
-          text: '80',
-          callback_data: '/flat_80'
+          text: 'Rome',
+          callback_data: '/capital_Rome'
         }
       ]
     ]
   }
 } as const
 
-export const floorOptions: TelegramBot.SendMessageOptions = {
+export const planetOptions: TelegramBot.SendMessageOptions = {
   reply_markup: {
     inline_keyboard: [
       [
         {
-          text: '1',
-          callback_data: '/floor_1'
-        },
-        {
-          text: '2',
-          callback_data: '/floor_2'
-        },
-        {
-          text: '3',
-          callback_data: '/floor_3'
+          text: 'Venus',
+          callback_data: '/planet_Venus'
         }
       ],
       [
         {
-          text: '4',
-          callback_data: '/floor_4'
-        },
-        {
-          text: '5',
-          callback_data: '/floor_5'
-        },
-        {
-          text: '6',
-          callback_data: '/floor_6'
+          text: 'Jupiter',
+          callback_data: '/planet_Jupiter'
         }
       ],
       [
         {
-          text: '7',
-          callback_data: '/floor_7'
-        },
-        {
-          text: '8',
-          callback_data: '/floor_8'
-        },
-        {
-          text: '9',
-          callback_data: '/floor_9'
+          text: 'Mars',
+          callback_data: '/planet_Mars'
         }
       ],
       [
         {
-          text: '10',
-          callback_data: '/floor_10'
+          text: 'Saturn',
+          callback_data: '/planet_Saturn'
         }
       ]
     ]
   }
 } as const
 
-export const streetOptions: TelegramBot.SendMessageOptions = {
+export const authorOptions: TelegramBot.SendMessageOptions = {
   reply_markup: {
     inline_keyboard: [
       [
         {
-          text: 'Георгиевская',
-          callback_data: '/street_Georgievskaya'
+          text: 'F. Scott Fitzgerald',
+          callback_data: '/author_Fitzgerald'
         }
       ],
       [
         {
-          text: 'Храмовая',
-          callback_data: '/street_Hramovaya'
+          text: 'Ernest Hemingway',
+          callback_data: '/author_Hemingway'
         }
       ],
       [
         {
-          text: 'Чугуевская',
-          callback_data: '/street_Chuguevskaya'
+          text: 'J.D. Salinger',
+          callback_data: '/author_Salinger'
         }
       ],
       [
         {
-          text: 'Днипровская',
-          callback_data: '/street_Dniprovskaya'
+          text: 'Mark Twain',
+          callback_data: '/author_Twain'
         }
       ]
     ]
@@ -172,7 +124,7 @@ export const startConversationOptions: TelegramBot.SendMessageOptions = {
     inline_keyboard: [
       [
         {
-          text: 'Я готова продолжать',
+          text: 'Unveil Secrets!',
           callback_data: '/next'
         }
       ]
@@ -185,7 +137,7 @@ export const nextOptions: TelegramBot.SendMessageOptions = {
     inline_keyboard: [
       [
         {
-          text: 'Вперед',
+          text: 'Next Secret',
           callback_data: '/next'
         }
       ]

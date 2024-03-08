@@ -5,23 +5,21 @@ import { connectToDb } from './utils/connectToDB.js'
 import { Message, User } from './models/Models.js'
 import {
   nextOptions,
-  startFlatOptions,
+  capitalOptions,
   startTestOptions
 } from './store/options.js'
 import { greetingsArr, nextSequence } from './store/steps.js'
-import GuessFlat from './handlers/guessFlat.js'
-import GuessFloor from './handlers/guessFloor.js'
-import GuessStreet from './handlers/guessStreet.js'
+import GuessCapitals from './handlers/guessCapitals.js'
+import GuessPlanet from './handlers/guessPlanet.js'
+import GuessAuthor from './handlers/guessAuthor.js'
 import 'dotenv/config'
-
-//TODO CHECK COMMANDS
 
 class Bot {
   bot: TelegramBot
   user: TUser | null
   chats: Record<string, number>
   startTestOptions: TelegramBot.SendMessageOptions
-  startFlatOptions: TelegramBot.SendMessageOptions
+  capitalOptions: TelegramBot.SendMessageOptions
   nextOptions: TelegramBot.SendMessageOptions
   commands: TelegramBot.BotCommand[]
   stepsCounter: number
@@ -34,7 +32,7 @@ class Bot {
     this.user = null
     this.commands = commands
     this.startTestOptions = startTestOptions
-    this.startFlatOptions = startFlatOptions
+    this.capitalOptions = capitalOptions
     this.nextOptions = nextOptions
     this.stepsCounter = 0
     this.isLastStep = false
@@ -71,7 +69,7 @@ class Bot {
   async denyUserAccess(chatId: ChatId): Promise<void> {
     await this.bot.sendMessage(
       chatId,
-      'Ваши попытки исчерпаны. Доступ к тесту больше недоступен. 😔'
+      "I'm sorry, but you've exhausted all your attempts for this task. Don't worry, you can try again later or explore other features of EnigmaGuardianBot. Remember, perseverance is key to unlocking the secrets of knowledge! 😔"
     )
   }
 
@@ -89,7 +87,7 @@ class Bot {
     await Message.create(newMessage)
     await this.bot.sendMessage(
       chatId,
-      'Спасибо за обратную связь. Я обязательно прочитаю это сообщение в скором времени 💬'
+      'Thank you for reaching out to the admin! Your message has been received, and they will be in touch with you shortly. If you have any urgent inquiries, feel free to explore other features of EnigmaGuardianBot in the meantime. Your patience is appreciated! 💬'
     )
   }
 
@@ -99,15 +97,15 @@ class Bot {
     let name = ''
     if (firstName) name = firstName || ''
     if (lastName) name = name + ' ' + lastName
-    if (!firstName && !lastName) name = 'Аноним'
+    if (!firstName && !lastName) name = 'Anonymous'
     const countMessagesFromUser = await Message.countDocuments({
       chatId
     })
     await this.bot.sendMessage(
       chatId,
-      `Ваше имя: ${name}\nВаши попытки: ${tryCount}\nЗабанен: ${
-        tryCount === 0 ? 'да' : 'нет'
-      }\nОтправлено личных сообщений разработику: ${countMessagesFromUser || 0}`
+      `Name: ${name}\nAttempt Count: ${tryCount}\nBanned Status: ${
+        tryCount === 0 ? 'Yes' : 'No'
+      }\nMessages Sent to Admin: ${countMessagesFromUser || 0}`
     )
   }
 
@@ -123,15 +121,15 @@ class Bot {
       if (data === '/start_test')
         return this.bot.sendMessage(
           chatId,
-          'Давайте начнем.\nПожалуйста, выберите номер своей квартиры, где был оставлен маленький подарок.',
-          this.startFlatOptions
+          'Let us begin.\nWhat is the capital of France?',
+          this.capitalOptions
         )
-      if (data.includes('flat'))
-        return new GuessFlat(data, this.user, this.bot).on()
-      if (data.includes('floor'))
-        return new GuessFloor(data, this.user, this.bot).on()
-      if (data.includes('street'))
-        return new GuessStreet(data, this.user, this.bot).on()
+      if (data.includes('capital'))
+        return new GuessCapitals(data, this.user, this.bot).on()
+      if (data.includes('planet'))
+        return new GuessPlanet(data, this.user, this.bot).on()
+      if (data.includes('author'))
+        return new GuessAuthor(data, this.user, this.bot).on()
 
       if (data === '/next') {
         const msg = nextSequence[this.stepsCounter]
@@ -150,7 +148,7 @@ class Bot {
   async handleContact(chatId: ChatId): Promise<void> {
     await this.bot.sendMessage(
       chatId,
-      'Если у вас возникли вопросы или проблемы, пожалуйста, опишите свою проблему сообщением ниже. 👇'
+      "Welcome to the Contact feature! If you have any questions, feedback, or encounter any issues, feel free to send a message to the admin. Your inquiries are valuable to us, and we're here to assist you with any problems or concerns you may have. Simply type your message, and the admin will get back to you as soon as possible. Thank you for reaching out 👇"
     )
     this.isGettingMessagesFromContact = true
   }
@@ -184,7 +182,7 @@ class Bot {
         if (!this.isLastStep && !this.isGettingMessagesFromContact)
           return this.bot.sendMessage(
             chatId,
-            'Неопознанная команда. Чего-чего? 🤔'
+            "I'm sorry, but I didn't quite catch that. If you need assistance or have any questions, feel free to explore the available features or type 'help' for more information. Thank you for your understanding! 🤔"
           )
 
         if (this.isGettingMessagesFromContact) {

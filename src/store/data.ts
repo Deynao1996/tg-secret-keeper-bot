@@ -1,10 +1,10 @@
 export const TRY_COUNT = 2
-export const FLAT_NUMBER = 80
-export const FLOOR_NUMBER = 2
-export const STREET_NAME = 'Chuguevskaya'
+export const CAPITAL_CORRECT = 'Paris'
+export const PLANET_CORRECT = 'Mars'
+export const AUTHOR_CORRECT = 'Fitzgerald'
 
 export const commands = [
-  { command: '/start', description: 'Старт' },
-  { command: '/info', description: 'Информация о пользователе' },
-  { command: '/contact', description: 'Связаться со мной' }
+  { command: '/start', description: 'Start' },
+  { command: '/info', description: 'Info about user' },
+  { command: '/contact', description: 'Contact admin' }
 ]
