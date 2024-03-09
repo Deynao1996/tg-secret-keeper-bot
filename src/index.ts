@@ -9,9 +9,12 @@ import {
   startTestOptions
 } from './store/options.js'
 import { greetingsArr, nextSequence } from './store/steps.js'
-import GuessCapitals from './handlers/guessCapitals.js'
-import GuessPlanet from './handlers/guessPlanet.js'
-import GuessAuthor from './handlers/guessAuthor.js'
+import Task from './task.js'
+import {
+  capitalConfig,
+  planetConfig,
+  authorConfig
+} from './store/taskConfigs.js'
 import 'dotenv/config'
 
 class Bot {
@@ -125,11 +128,26 @@ class Bot {
           this.capitalOptions
         )
       if (data.includes('capital'))
-        return new GuessCapitals(data, this.user, this.bot).on()
+        return new Task({
+          data,
+          user: this.user,
+          bot: this.bot,
+          ...capitalConfig
+        }).on()
       if (data.includes('planet'))
-        return new GuessPlanet(data, this.user, this.bot).on()
+        return new Task({
+          data,
+          user: this.user,
+          bot: this.bot,
+          ...planetConfig
+        }).on()
       if (data.includes('author'))
-        return new GuessAuthor(data, this.user, this.bot).on()
+        return new Task({
+          data,
+          user: this.user,
+          bot: this.bot,
+          ...authorConfig
+        }).on()
 
       if (data === '/next') {
         const msg = nextSequence[this.stepsCounter]
